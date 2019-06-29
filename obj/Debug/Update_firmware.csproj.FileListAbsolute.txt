@@ -1,0 +1,9 @@
+D:\Minhneo\Visual\Update_firmware\bin\Debug\Update_firmware.exe.config
+D:\Minhneo\Visual\Update_firmware\bin\Debug\Update_firmware.exe
+D:\Minhneo\Visual\Update_firmware\bin\Debug\Update_firmware.pdb
+D:\Minhneo\Visual\Update_firmware\obj\Debug\Update_firmware.Form1.resources
+D:\Minhneo\Visual\Update_firmware\obj\Debug\Update_firmware.Properties.Resources.resources
+D:\Minhneo\Visual\Update_firmware\obj\Debug\Update_firmware.csproj.GenerateResource.cache
+D:\Minhneo\Visual\Update_firmware\obj\Debug\Update_firmware.csproj.CoreCompileInputs.cache
+D:\Minhneo\Visual\Update_firmware\obj\Debug\Update_firmware.exe
+D:\Minhneo\Visual\Update_firmware\obj\Debug\Update_firmware.pdb
