@@ -1,0 +1,15 @@
+C:\Users\TPA.TK2.MrMinh\Desktop\TcpServer-src\tcpServer\bin\Debug\tcpServer.dll
+C:\Users\TPA.TK2.MrMinh\Desktop\TcpServer-src\tcpServer\bin\Debug\tcpServer.pdb
+C:\Users\TPA.TK2.MrMinh\Desktop\TcpServer-src\tcpServer\obj\Debug\tcpServer.csprojAssemblyReference.cache
+C:\Users\TPA.TK2.MrMinh\Desktop\TcpServer-src\tcpServer\obj\Debug\tcpServer.TcpServer.resources
+C:\Users\TPA.TK2.MrMinh\Desktop\TcpServer-src\tcpServer\obj\Debug\tcpServer.csproj.GenerateResource.cache
+C:\Users\TPA.TK2.MrMinh\Desktop\TcpServer-src\tcpServer\obj\Debug\tcpServer.csproj.CoreCompileInputs.cache
+C:\Users\TPA.TK2.MrMinh\Desktop\TcpServer-src\tcpServer\obj\Debug\tcpServer.dll
+C:\Users\TPA.TK2.MrMinh\Desktop\TcpServer-src\tcpServer\obj\Debug\tcpServer.pdb
+D:\Minhneo\Visual\Update_firmware\tcpServer\bin\Debug\tcpServer.dll
+D:\Minhneo\Visual\Update_firmware\tcpServer\bin\Debug\tcpServer.pdb
+D:\Minhneo\Visual\Update_firmware\tcpServer\obj\Debug\tcpServer.TcpServer.resources
+D:\Minhneo\Visual\Update_firmware\tcpServer\obj\Debug\tcpServer.csproj.GenerateResource.cache
+D:\Minhneo\Visual\Update_firmware\tcpServer\obj\Debug\tcpServer.csproj.CoreCompileInputs.cache
+D:\Minhneo\Visual\Update_firmware\tcpServer\obj\Debug\tcpServer.dll
+D:\Minhneo\Visual\Update_firmware\tcpServer\obj\Debug\tcpServer.pdb
