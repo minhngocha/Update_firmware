@@ -7,3 +7,4 @@ D:\Minhneo\Visual\Update_firmware\obj\Debug\Update_firmware.csproj.GenerateResou
 D:\Minhneo\Visual\Update_firmware\obj\Debug\Update_firmware.csproj.CoreCompileInputs.cache
 D:\Minhneo\Visual\Update_firmware\obj\Debug\Update_firmware.exe
 D:\Minhneo\Visual\Update_firmware\obj\Debug\Update_firmware.pdb
+D:\Minhneo\Visual\Update_firmware\obj\Debug\Update_firmware.csprojAssemblyReference.cache
