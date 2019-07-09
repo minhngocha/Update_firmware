@@ -494,5 +494,22 @@ namespace tcpServer
                 }
             }
         }
+
+        public void Send(char[] data)
+        {
+            lock (sem)
+            {
+                foreach (TcpServerConnection conn in connections)
+                {
+                    conn.sendData(data);
+                }
+                Thread.Yield();
+                if (waiting)
+                {
+                    sem.Release();
+                    waiting = false;
+                }
+            }
+        }
     }
 }

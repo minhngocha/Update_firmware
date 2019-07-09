@@ -22,3 +22,5 @@ D:\Minhneo\Visual\Update_firmware\Test App\obj\x86\Debug\TestApp.csproj.CoreComp
 D:\Minhneo\Visual\Update_firmware\Test App\obj\x86\Debug\TestApp.csproj.CopyComplete
 D:\Minhneo\Visual\Update_firmware\Test App\obj\x86\Debug\tcpServerTester.exe
 D:\Minhneo\Visual\Update_firmware\Test App\obj\x86\Debug\tcpServerTester.pdb
+D:\Minhneo\Visual\Update_firmware\Test App\bin\Debug\Nito.KitchenSink.CRC.dll
+D:\Minhneo\Visual\Update_firmware\Test App\bin\Debug\Nito.KitchenSink.CRC.xml

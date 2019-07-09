@@ -24,6 +24,9 @@ namespace testerApp
 {
     public partial class frmMain : Form
     {
+        string g_frameSuccess = "###|TPA0123456|CMD=|v|000000|00&&&";
+        string g_frameUpdate  = "###|TPA0123456|CMD=|u|000|00&&&";
+        char[] tx_array = new char[512];
         public delegate void invokeDelegate();
 
         public frmMain()
@@ -78,34 +81,88 @@ namespace testerApp
 
         private void response()
         {
-            string data = "";
+            DateTime nowtime = DateTime.Now;
             if (ckB_EnableUpdate.Checked == true)
             {
-                if(rdb_ver1.Checked == true)
+                tx_array = g_frameSuccess.ToCharArray();
+                tx_array[22] = Convert.ToChar(nowtime.Year - 2000);
+                tx_array[23] = Convert.ToChar(nowtime.Month);
+                tx_array[24] = Convert.ToChar(nowtime.Day);
+                tx_array[25] = Convert.ToChar(nowtime.Hour);
+                tx_array[26] = Convert.ToChar(nowtime.Minute);
+                tx_array[27] = Convert.ToChar(nowtime.Second);
+                UInt16 crc = CalculateCRC(tx_array, 3, 26);
+                tx_array[29] = (char)(crc / 256);
+                tx_array[30] = (char)(crc % 256);
+                tcpServer1.Send(tx_array);
+                logData(1, new string(tx_array), Color.DeepPink);
+
+                if (rdb_ver1.Checked == true)
                 {
-                    data = "SUCCESS&UPDATE:" + rdb_ver1.Text.ToString() + "$";
+                    tx_array = g_frameUpdate.ToCharArray();
+                    tx_array[22] = (char)0x00;
+                    tx_array[23] = (char)0x01;
+                    tx_array[24] = (char)0x00;
+                    crc = CalculateCRC(tx_array, 3, 23);
+                    tx_array[26] = (char)(crc / 256);
+                    tx_array[27] = (char)(crc % 256);
+                    tcpServer1.Send(tx_array);
+                    logData(1, new string(tx_array), Color.DeepPink);
                 }
                 else if (rdb_ver2.Checked == true)
                 {
-                    data = "SUCCESS&UPDATE:" + rdb_ver2.Text.ToString() + "$";
+                    tx_array = g_frameUpdate.ToCharArray();
+                    tx_array[22] = (char)0x00;
+                    tx_array[23] = (char)0x02;
+                    tx_array[24] = (char)0x00;
+                    crc = CalculateCRC(tx_array, 3, 23);
+                    tx_array[26] = (char)(crc / 256);
+                    tx_array[27] = (char)(crc % 256);
+                    tcpServer1.Send(tx_array);
+                    logData(1, new string(tx_array), Color.DeepPink);
                 }
                 else if (rdb_ver3.Checked == true)
                 {
-                    data = "SUCCESS&UPDATE:" + rdb_ver3.Text.ToString() + "$";
+                    tx_array = g_frameUpdate.ToCharArray();
+                    tx_array[22] = (char)0x00;
+                    tx_array[23] = (char)0x03;
+                    tx_array[24] = (char)0x00;
+                    crc = CalculateCRC(tx_array, 3, 23);
+                    tx_array[26] = (char)(crc / 256);
+                    tx_array[27] = (char)(crc % 256);
+                    tcpServer1.Send(tx_array);
+                    logData(1, new string(tx_array), Color.DeepPink);
                 }
                 else if (rdb_ver4.Checked == true)
                 {
-                    data = "SUCCESS&UPDATE:" + rdb_ver4.Text.ToString() + "$";
+                    tx_array = g_frameUpdate.ToCharArray();
+                    tx_array[22] = (char)0x00;
+                    tx_array[23] = (char)0x04;
+                    tx_array[24] = (char)0x00;
+                    crc = CalculateCRC(tx_array, 3, 23);
+                    tx_array[26] = (char)(crc / 256);
+                    tx_array[27] = (char)(crc % 256);
+                    tcpServer1.Send(tx_array);
+                    logData(1, new string(tx_array), Color.DeepPink);
                 }
             }
             else
             {
-                data = "SUCCESS";
+                tx_array = g_frameSuccess.ToCharArray();
+                tx_array[22] = Convert.ToChar(nowtime.Year - 2000);
+                tx_array[23] = Convert.ToChar(nowtime.Month);
+                tx_array[24] = Convert.ToChar(nowtime.Day);
+                tx_array[25] = Convert.ToChar(nowtime.Hour);
+                tx_array[26] = Convert.ToChar(nowtime.Minute);
+                tx_array[27] = Convert.ToChar(nowtime.Second);
+                UInt16 crc = CalculateCRC(tx_array, 3, 26);
+                tx_array[29] = (char) (crc / 256);
+                tx_array[30] = (char) (crc % 256);
+                tcpServer1.Send(tx_array);
+                logData(1, new string(tx_array), Color.DeepPink);
             }
 
-            tcpServer1.Send(data);
 
-            logData(1, data, Color.DeepPink);
         }
         private void send()
         {
@@ -301,6 +358,71 @@ namespace testerApp
         private void BtnClear_Click(object sender, EventArgs e)
         {
             txtLog.Clear();
+        }
+
+        private UInt16 reflect(UInt16 data, UInt16 bits)
+        {
+            UInt32 reflection = 0x00000000;
+            // Reflect the data about the center bit.
+            for (int bit = 0; bit < bits; bit++)
+            {
+                // If the LSB bit is set, set the reflection of it.
+                if ((data & 0x01) != 0)
+                {
+                    reflection |= (UInt32) (1 << ((bits - 1) - bit));
+                }
+            }
+            return (UInt16) (reflection);
+        }
+
+        private UInt16 fastCrc(char[] data, int start, UInt16 length, UInt16 reflectIn, UInt16 reflectOut, UInt16 polynomial, UInt16 xorIn, UInt16 xorOut, UInt16 msbMask, UInt16 mask)
+        {
+            UInt16 crc = xorIn;
+
+            int j;
+            UInt16 c;
+            int bit;
+
+            if (length == 0) return crc;
+
+            for (int i = start; i < (start + length); i++)
+            {
+                c = data[i];
+
+                if (reflectIn != 0)
+                    c = (UInt16) reflect(c, 8);
+
+                j = 0x80;
+
+                while (j > 0)
+                {
+                    bit = (int)(crc & msbMask);
+                    crc <<= 1;
+
+                    if ((c & j) != 0)
+                    {
+                        bit = (int)(bit ^ msbMask);
+                    }
+
+                    if (bit != 0)
+                    {
+                        crc ^= polynomial;
+                    }
+
+                   j >>= 1;
+                }
+            }
+
+            if (reflectOut != 0)
+            {
+                crc = (UInt16) ((reflect(crc, 32) ^ (UInt16)xorOut) & (UInt16)mask);
+            }
+
+            return crc;
+        }
+private UInt16 CalculateCRC(char[] array, UInt16 posStart, UInt16 length)
+        {
+            return fastCrc(array, posStart, length, 0, 0, 0x1021, 0x0000, 0x0000, 0x8000, 0xffff);
         }
     }
 }

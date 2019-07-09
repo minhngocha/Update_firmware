@@ -126,6 +126,19 @@ namespace tcpServer
             }
         }
 
+        public void sendData(char[] data)
+        {
+            byte[] array = new byte[data.Length];//= m_encoding.GetBytes(data);
+            for(int i = 0; i < data.Length; i++)
+            {
+                array[i] = (byte) (data[i]);
+            }
+            lock (messagesToSend)
+            {
+                messagesToSend.Add(array);
+            }
+        }
+
         public void forceDisconnect()
         {
             lock (m_socket)
