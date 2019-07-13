@@ -14,6 +14,3 @@ D:\Minhneo\Visual\Update_firmware\tcpServer\obj\Debug\tcpServer.csproj.CoreCompi
 D:\Minhneo\Visual\Update_firmware\tcpServer\obj\Debug\tcpServer.dll
 D:\Minhneo\Visual\Update_firmware\tcpServer\obj\Debug\tcpServer.pdb
 D:\Minhneo\Visual\Update_firmware\tcpServer\obj\Debug\tcpServer.csprojAssemblyReference.cache
-D:\Minhneo\Visual\Update_firmware\tcpServer\bin\Debug\Nito.KitchenSink.CRC.dll
-D:\Minhneo\Visual\Update_firmware\tcpServer\bin\Debug\Nito.KitchenSink.CRC.xml
-D:\Minhneo\Visual\Update_firmware\tcpServer\obj\Debug\tcpServer.csproj.CopyComplete

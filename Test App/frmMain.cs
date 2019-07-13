@@ -184,7 +184,7 @@ namespace testerApp
             txtLog.SelectionStart = txtLog.Text.Length;
             txtLog.SelectionLength = 0;
             txtLog.SelectionColor = color;
-            //txtLog.AppendText(tcpServer1.Connections.ip);
+            
             if (state == 0)
             {
                 txtLog.AppendText(DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss tt") + " RECEIVED:\r\n");
@@ -243,6 +243,11 @@ namespace testerApp
                     logData(0, dataStr, Color.Black);
                     if(data[0] == '#' && data[1] == '#' && data[2] == '#' && data[3] == '|')
                     {
+                        if(data[20] == 'b')
+                        {
+                            this.txtVer.Text = "VM_" + data[100].ToString() + "." + data[101].ToString() + 
+                             "." + data[102].ToString() + ".bin";
+                        }
                         response();
                     }
                     

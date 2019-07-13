@@ -60,6 +60,7 @@
             this.txtLog = new System.Windows.Forms.RichTextBox();
             this.tcpServer1 = new tcpServer.TcpServer(this.components);
             this.btnClear = new System.Windows.Forms.Button();
+            this.txtVer = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // txtText
@@ -273,7 +274,7 @@
             // ckB_EnableUpdate
             // 
             this.ckB_EnableUpdate.AutoSize = true;
-            this.ckB_EnableUpdate.Location = new System.Drawing.Point(547, 403);
+            this.ckB_EnableUpdate.Location = new System.Drawing.Point(579, 397);
             this.ckB_EnableUpdate.Name = "ckB_EnableUpdate";
             this.ckB_EnableUpdate.Size = new System.Drawing.Size(97, 17);
             this.ckB_EnableUpdate.TabIndex = 36;
@@ -284,7 +285,7 @@
             // 
             this.rdb_ver1.AutoSize = true;
             this.rdb_ver1.Checked = true;
-            this.rdb_ver1.Location = new System.Drawing.Point(442, 435);
+            this.rdb_ver1.Location = new System.Drawing.Point(478, 435);
             this.rdb_ver1.Name = "rdb_ver1";
             this.rdb_ver1.Size = new System.Drawing.Size(88, 17);
             this.rdb_ver1.TabIndex = 37;
@@ -295,7 +296,7 @@
             // rdb_ver2
             // 
             this.rdb_ver2.AutoSize = true;
-            this.rdb_ver2.Location = new System.Drawing.Point(442, 461);
+            this.rdb_ver2.Location = new System.Drawing.Point(478, 461);
             this.rdb_ver2.Name = "rdb_ver2";
             this.rdb_ver2.Size = new System.Drawing.Size(88, 17);
             this.rdb_ver2.TabIndex = 38;
@@ -306,7 +307,7 @@
             // rdb_ver3
             // 
             this.rdb_ver3.AutoSize = true;
-            this.rdb_ver3.Location = new System.Drawing.Point(547, 433);
+            this.rdb_ver3.Location = new System.Drawing.Point(583, 433);
             this.rdb_ver3.Name = "rdb_ver3";
             this.rdb_ver3.Size = new System.Drawing.Size(88, 17);
             this.rdb_ver3.TabIndex = 39;
@@ -317,7 +318,7 @@
             // rdb_ver4
             // 
             this.rdb_ver4.AutoSize = true;
-            this.rdb_ver4.Location = new System.Drawing.Point(547, 461);
+            this.rdb_ver4.Location = new System.Drawing.Point(583, 461);
             this.rdb_ver4.Name = "rdb_ver4";
             this.rdb_ver4.Size = new System.Drawing.Size(88, 17);
             this.rdb_ver4.TabIndex = 40;
@@ -364,11 +365,20 @@
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.BtnClear_Click);
             // 
+            // txtVer
+            // 
+            this.txtVer.Location = new System.Drawing.Point(466, 397);
+            this.txtVer.Multiline = true;
+            this.txtVer.Name = "txtVer";
+            this.txtVer.Size = new System.Drawing.Size(100, 25);
+            this.txtVer.TabIndex = 43;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(688, 564);
+            this.Controls.Add(this.txtVer);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.txtLog);
             this.Controls.Add(this.rdb_ver4);
@@ -439,6 +449,7 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.RichTextBox txtLog;
         private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.TextBox txtVer;
     }
 }
 
