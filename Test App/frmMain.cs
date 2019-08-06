@@ -29,9 +29,15 @@ namespace testerApp
         char[] tx_array = new char[512];
         public delegate void invokeDelegate();
 
+        Logger log = new Logger("Data_");
         public frmMain()
         {
             InitializeComponent();
+
+            var targetLogFile = new FileInfo("./Server_LogFile.txt");
+            Console.WriteLine(targetLogFile.FullName);
+            Logger.LogToConsole = false;
+            Logger.Start(targetLogFile);
         }
 
         int count_connect = 0;
@@ -95,7 +101,14 @@ namespace testerApp
                 tx_array[29] = (char)(crc / 256);
                 tx_array[30] = (char)(crc % 256);
                 tcpServer1.Send(tx_array);
-                logData(1, new string(tx_array), Color.DeepPink);
+                //logData(1, new string(tx_array), Color.DeepPink);
+
+                byte[] bRoot = new byte[34];
+                for (int index = 0; index < 34; index++)
+                {
+                    bRoot[index] = (byte)tx_array[index];
+                }
+                logData(1, BitConverter.ToString(bRoot), Color.DeepPink);
 
                 if (rdb_ver1.Checked == true)
                 {
@@ -107,7 +120,13 @@ namespace testerApp
                     tx_array[26] = (char)(crc / 256);
                     tx_array[27] = (char)(crc % 256);
                     tcpServer1.Send(tx_array);
-                    logData(1, new string(tx_array), Color.DeepPink);
+                    //logData(1, new string(tx_array), Color.DeepPink);
+                    byte[] bRoot1 = new byte[31];
+                    for (int index = 0; index < 31; index++)
+                    {
+                        bRoot1[index] = (byte)tx_array[index];
+                    }
+                    logData(1, BitConverter.ToString(bRoot1), Color.DeepPink);
                 }
                 else if (rdb_ver2.Checked == true)
                 {
@@ -119,7 +138,13 @@ namespace testerApp
                     tx_array[26] = (char)(crc / 256);
                     tx_array[27] = (char)(crc % 256);
                     tcpServer1.Send(tx_array);
-                    logData(1, new string(tx_array), Color.DeepPink);
+                    //logData(1, new string(tx_array), Color.DeepPink);
+                    byte[] bRoot1 = new byte[31];
+                    for (int index = 0; index < 31; index++)
+                    {
+                        bRoot1[index] = (byte)tx_array[index];
+                    }
+                    logData(1, BitConverter.ToString(bRoot1), Color.DeepPink);
                 }
                 else if (rdb_ver3.Checked == true)
                 {
@@ -131,7 +156,14 @@ namespace testerApp
                     tx_array[26] = (char)(crc / 256);
                     tx_array[27] = (char)(crc % 256);
                     tcpServer1.Send(tx_array);
-                    logData(1, new string(tx_array), Color.DeepPink);
+                    //logData(1, new string(tx_array), Color.DeepPink);
+
+                    byte[] bRoot1 = new byte[31];
+                    for (int index = 0; index < 31; index++)
+                    {
+                        bRoot1[index] = (byte)tx_array[index];
+                    }
+                    logData(1, BitConverter.ToString(bRoot1), Color.DeepPink);
                 }
                 else if (rdb_ver4.Checked == true)
                 {
@@ -143,7 +175,14 @@ namespace testerApp
                     tx_array[26] = (char)(crc / 256);
                     tx_array[27] = (char)(crc % 256);
                     tcpServer1.Send(tx_array);
-                    logData(1, new string(tx_array), Color.DeepPink);
+                    //logData(1, new string(tx_array), Color.DeepPink);
+
+                    byte[] bRoot1 = new byte[31];
+                    for (int index = 0; index < 31; index++)
+                    {
+                        bRoot1[index] = (byte)tx_array[index];
+                    }
+                    logData(1, BitConverter.ToString(bRoot1), Color.DeepPink);
                 }
             }
             else
@@ -159,7 +198,16 @@ namespace testerApp
                 tx_array[29] = (char) (crc / 256);
                 tx_array[30] = (char) (crc % 256);
                 tcpServer1.Send(tx_array);
-                logData(1, new string(tx_array), Color.DeepPink);
+                //logData(1, new string(tx_array), Color.DeepPink);
+
+                byte[] bRoot = new byte[34];
+                for (int index = 0; index < 34; index++)
+                {
+                    bRoot[index] = (byte) tx_array[index];
+                }
+                logData(1, BitConverter.ToString(bRoot), Color.DeepPink);
+
+                
             }
 
 
@@ -177,6 +225,8 @@ namespace testerApp
             tcpServer1.Send(data);
 
             logData(1, data, Color.DeepPink);
+
+
         }
 
         public void logData(int state, string text, Color color)
@@ -184,26 +234,34 @@ namespace testerApp
             txtLog.SelectionStart = txtLog.Text.Length;
             txtLog.SelectionLength = 0;
             txtLog.SelectionColor = color;
-            
+
+            string bufstr = "";
             if (state == 0)
             {
-                txtLog.AppendText(DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss tt") + " RECEIVED:\r\n");
+                bufstr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss tt") + " RECEIVED:\r\n";
             }
             else if (state == 1)
             {
-                txtLog.AppendText(DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss tt") + " SENT:\r\n");
+                bufstr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss tt") + " SENT:\r\n";
             }
             else if (state == 3)
             {
-                txtLog.AppendText(DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss tt") + " Connect form: ");
+                bufstr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss tt") + " Connect form: ";
             }
             else if (state == 4)
             {
-                txtLog.AppendText(DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss tt") + " Disonnect form: ");
+                bufstr = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss tt") + " Disonnect form: ";
             }
+            /* Add header content */
+            txtLog.AppendText(bufstr);
+            log.Info(bufstr);
+            /* Add main content */
             txtLog.SelectionColor = color;
             txtLog.AppendText(text);
+            log.Info(text);
+            /* Add character \r\n */
             txtLog.AppendText("\r\n");
+            log.Info("\r\n");
             if (txtLog.Lines.Length > 500)
             {
                 string[] temp = new string[500];
@@ -240,7 +298,7 @@ namespace testerApp
 
                 invokeDelegate del = () =>
                 {
-                    logData(0, dataStr, Color.Black);
+                    logData(0, BitConverter.ToString(data), Color.Black);
                     if(data[0] == '#' && data[1] == '#' && data[2] == '#' && data[3] == '|')
                     {
                         if(data[20] == 'b')
